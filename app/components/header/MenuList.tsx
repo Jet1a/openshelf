@@ -38,14 +38,12 @@ const MenuList = ({ currentUser }: MenuListProps) => {
       <div className="flex flex-row items-center gap-3">
         <div className="flex cursor-pointer">
           <MenuItem onClick={() => router.push(`/discover`)} label="Discover" />
-          <MenuItem onClick={() => router.push(`/mybooks`)} label="My Book" />
+          <MenuItem onClick={() => router.push(`/mybooks`)} label="My Books" />
           <MenuItem
             onClick={() => router.push(`/favorites`)}
-            label="Favorite"
+            label="Favorites"
           />
-          {currentUser?.isAdmin && (
-            <MenuItem onClick={onAddBook} label="Add Book" />
-          )}
+
           <div
             onClick={toggleOpen}
             className="p-2 flex items-center gap-3 rounded-full cursor-pointer transition md:py-1 md:px-2 hover:shadow-md"
@@ -54,14 +52,24 @@ const MenuList = ({ currentUser }: MenuListProps) => {
               <Avatar src={currentUser?.image} />
             </div>
             {isOpen && (
-              <div className="absolute z-10 rounded-lg shadow-lg w-[20vw] md:w-2/5 border border-neutral-300 bg-white overflow-hidden right-0 top-14 text-sm">
-                <div className="flex flex-col cursor-pointer">
+              <div className="absolute z-10 rounded-lg shadow-lg w-[20vw] md:w-2/4 border border-neutral-300 bg-white overflow-hidden right-0 top-14 text-sm">
+                <div className="flex flex-col">
                   {currentUser ? (
                     <>
-                      <MenuItem
-                        onClick={() => {}}
-                        label={`Welcome ${currentUser?.name}`}
-                      />
+                      <span className="px-4 py-3 transition font-semibold">
+                        Welcome {currentUser?.name}
+                      </span>
+                      <hr />
+                      {currentUser?.isAdmin && (
+                        <>
+                          <MenuItem onClick={onAddBook} label="Add Books" />
+                          <MenuItem
+                            onClick={() => router.push('/rented')}
+                            label="Rental History"
+                          />
+                          <MenuItem onClick={() => router.push('/catalog')} label="Catalog" />
+                        </>
+                      )}
                       <MenuItem onClick={() => signOut()} label="Logout" />
                     </>
                   ) : (

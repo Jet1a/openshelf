@@ -2,15 +2,15 @@
 import React from "react";
 import { SafeUser } from "../types";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import useFavorite from "../hook/useFavorite";
 
 interface HeartButtonProps {
-  listingId: string;
+  bookId: string;
   currentUser?: SafeUser | null;
 }
 
-const HeartButton = ({ listingId, currentUser }: HeartButtonProps) => {
-  const hasFavorite = false;
-  const toggleFavorite = () => {};
+const HeartButton = ({ bookId, currentUser }: HeartButtonProps) => {
+  const { hasFavorited, toggleFavorite } = useFavorite({ bookId, currentUser });
 
   return (
     <div
@@ -23,7 +23,7 @@ const HeartButton = ({ listingId, currentUser }: HeartButtonProps) => {
       />
       <AiFillHeart
         size={22}
-        className={`${hasFavorite ? "fill-rose-500" : "fill-neutral-500/70"} `}
+        className={`${hasFavorited ? "fill-rose-500" : "fill-neutral-500/70"} `}
       />
     </div>
   );

@@ -35,17 +35,23 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        <ClientOnly>
-          <ToasterProvider />
-          <LoginModal />
-          <RegisterModal />
-          <AddModal />
-          <Navbar currentUser={currentUser} />
-        </ClientOnly>
-        {children}
-        <Footer />
+        <div className="flex flex-col min-h-screen">
+          {/* Content Area */}
+          <main className="flex-grow">
+            <ClientOnly>
+              <ToasterProvider />
+              <LoginModal />
+              <RegisterModal />
+              <AddModal />
+              <Navbar currentUser={currentUser} />
+            </ClientOnly>
+            {children}
+          </main>
+          {/* Footer */}
+          <Footer />
+        </div>
       </body>
     </html>
   );

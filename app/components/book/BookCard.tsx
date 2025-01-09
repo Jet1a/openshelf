@@ -1,21 +1,22 @@
 "use client";
 
-import { SafeUser } from "@/app/types";
-import { Listing, Rental } from "@prisma/client";
+import { SafeListing, SafeRental, SafeUser } from "@/app/types";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { format } from "date-fns";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
 
 interface BookCardProps {
-  data: Listing;
-  rental?: Rental;
+  data: SafeListing;
+  rental?: SafeRental;
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
+  secondaryLabel?: string;
+  onSecondaryAction?: (id: string) => void;
   currentUser?: SafeUser | null;
 }
 
@@ -26,11 +27,34 @@ const BookCard = ({
   disabled,
   actionId = "",
   actionLabel,
+  secondaryLabel,
+  onSecondaryAction,
   currentUser,
 }: BookCardProps) => {
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+
+  const pathname = window.location.pathname;
+
+  useEffect(() => {
+    if (pathname !== "/rented") {
+      setIsClient(true);
+    }
+  }, [pathname]);
 
   const handleCancel = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      if (disabled) {
+        return;
+      }
+
+      onAction?.(actionId);
+    },
+    [onAction, disabled, actionId]
+  );
+
+  const handleEdit = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
       if (disabled) {
@@ -57,7 +81,7 @@ const BookCard = ({
       onClick={() => router.push(`/discover/product/${data.id}`)}
       className="col-span-1 cursor-pointer"
     >
-      <div className="flex flex-col space-y-1 w-full text-center">
+      <div className="flex flex-col space-y-1 w-full text-center h-full">
         <div className="h-[300px] w-full relative border rounded-lg overflow-hidden shadow-sm">
           <Image
             src={data.imageSrc}
@@ -66,23 +90,40 @@ const BookCard = ({
             className="object-contain py-4 h-full w-full hover:scale-105 transition duration-300 ease-in-out"
           />
           <div className="absolute top-5 right-5">
-            <HeartButton listingId={data.id} currentUser={currentUser} />
+            <HeartButton bookId={data.id} currentUser={currentUser} />
           </div>
         </div>
-        <div className="font-semibold text-md">{data.title}</div>
-        <div className="font-light text-sm">
-          <span>by {data.author}</span>
+        <div className="flex-1">
+          <div className="font-semibold text-md">{data.title}</div>
+          <div className="font-light text-sm">
+            <span>by {data.author}</span>
+          </div>
+          <div className="font-light text-neutral-500 text-sm">
+            {rentalDate || data.category}
+          </div>
         </div>
-        <div className="font-light text-neutral-500 text-xs">
-          {rentalDate || data.category}
+        <div className="flex items-center justify-center gap-2 pt-2">
+          {onAction && actionLabel && (
+            <Button
+              disable={disabled}
+              small
+              label={actionLabel}
+              onClick={handleCancel}
+            />
+          )}
+          {onSecondaryAction && secondaryLabel && (
+            <Button
+              disable={disabled}
+              small
+              label={secondaryLabel}
+              onClick={handleEdit}
+            />
+          )}
         </div>
-        {onAction && actionLabel && (
-          <Button
-            disable={disabled}
-            small
-            label={actionLabel}
-            onClick={handleCancel}
-          />
+        {!isClient && (
+          <span className="font-light text-neutral-500 text-xs">
+            ( rent by {rental?.userId} )
+          </span>
         )}
       </div>
     </div>

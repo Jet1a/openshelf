@@ -5,14 +5,12 @@ import MenuList from "./MenuList";
 import Logo from "./Logo";
 import Search from "./Search";
 import { SafeUser } from "@/app/types";
-import Categories from "../Categories";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
-  category?: boolean;
 }
 
-const Navbar = ({ currentUser, category }: NavbarProps) => {
+const Navbar = ({ currentUser }: NavbarProps) => {
   return (
     <nav className="w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b">
@@ -26,7 +24,6 @@ const Navbar = ({ currentUser, category }: NavbarProps) => {
           </div>
         </Container>
       </div>
-      {category && <Categories />}
     </nav>
   );
 };

@@ -3,6 +3,7 @@ import React from "react";
 interface MenuItemProps {
   onClick: () => void;
   label: string | null;
+  hover?: boolean;
 }
 
 const MenuItem = ({ onClick, label = "User" }: MenuItemProps) => {
@@ -10,7 +11,7 @@ const MenuItem = ({ onClick, label = "User" }: MenuItemProps) => {
     <div onClick={onClick} className="px-4 py-3 transition font-semibold">
       <div className="group relative">
         <span>{label}</span>
-        <span className="absolute -bottom-1 left-0 w-0 transition-all h-1 bg-orange-400 group-hover:w-full"></span>
+        <span className="absolute -bottom-1 left-0 w-0 transition-all h-[2px] bg-orange-400 group-hover:w-full"></span>
       </div>
     </div>
   );

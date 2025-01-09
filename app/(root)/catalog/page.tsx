@@ -1,12 +1,13 @@
 import getCurrentUser from "@/app/action/getCurrentUser";
-import getRental from "@/app/action/getRental";
-import BookRentClient from "@/app/components/pages/BookRentClient";
+import getListings from "@/app/action/getListings";
+import Categories from "@/app/components/Categories";
 import ClientOnly from "@/app/components/ClientOnly";
 import EmptyState from "@/app/components/EmptyState";
+import CatalogClient from "@/app/components/pages/CatalogClient";
+import React from "react";
 
-const MybookPage = async () => {
+const CatalogPage = async () => {
   const currentUser = await getCurrentUser();
-
   if (!currentUser) {
     return (
       <ClientOnly>
@@ -15,16 +16,17 @@ const MybookPage = async () => {
     );
   }
 
-  const rentals = await getRental({
+  const listings = await getListings({
     userId: currentUser.id,
   });
 
-  if (rentals.length === 0) {
+  if (listings.length === 0) {
     return (
       <ClientOnly>
+        <Categories />
         <EmptyState
-          title="No books found"
-          subtitle="Try discover and borrowed some of our book!"
+          title="No catalog found"
+          subtitle="Looks like you haven't created once."
         />
       </ClientOnly>
     );
@@ -32,9 +34,9 @@ const MybookPage = async () => {
 
   return (
     <ClientOnly>
-      <BookRentClient rentals={rentals} currentUser={currentUser} />
+      <CatalogClient listings={listings} currentUser={currentUser} />
     </ClientOnly>
   );
 };
 
-export default MybookPage;
+export default CatalogPage;

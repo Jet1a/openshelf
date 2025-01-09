@@ -1,10 +1,11 @@
 import getCurrentUser from "@/app/action/getCurrentUser";
 import getRental from "@/app/action/getRental";
-import BookRentClient from "@/app/components/pages/BookRentClient";
 import ClientOnly from "@/app/components/ClientOnly";
 import EmptyState from "@/app/components/EmptyState";
+import RentedClient from "@/app/components/pages/RentedClient";
+import React from "react";
 
-const MybookPage = async () => {
+const RentedBookPage = async () => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -16,15 +17,15 @@ const MybookPage = async () => {
   }
 
   const rentals = await getRental({
-    userId: currentUser.id,
+    authorId: currentUser.id,
   });
 
   if (rentals.length === 0) {
     return (
       <ClientOnly>
         <EmptyState
-          title="No books found"
-          subtitle="Try discover and borrowed some of our book!"
+          title="No rentals found"
+          subtitle="Look like there's no rentals right now"
         />
       </ClientOnly>
     );
@@ -32,9 +33,9 @@ const MybookPage = async () => {
 
   return (
     <ClientOnly>
-      <BookRentClient rentals={rentals} currentUser={currentUser} />
+      <RentedClient rentals={rentals} currentUser={currentUser}  />
     </ClientOnly>
   );
 };
 
-export default MybookPage;
+export default RentedBookPage;
