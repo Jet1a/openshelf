@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Container from "../Container";
+import useAddModal from "@/app/hook/useAddModal";
+import AddModal from "../modal/AddModal";
 
 interface CatalogClientProps {
   listings: SafeListing[];
@@ -15,7 +17,9 @@ interface CatalogClientProps {
 
 const CatalogClient = ({ listings, currentUser }: CatalogClientProps) => {
   const router = useRouter();
+  const addModal = useAddModal();
   const [deletingId, setDeletingId] = useState("");
+  const [editingBook, setEditingBook] = useState<SafeListing | null>(null);
 
   const onCancel = useCallback(
     (id: string) => {
@@ -37,12 +41,24 @@ const CatalogClient = ({ listings, currentUser }: CatalogClientProps) => {
     [router]
   );
 
-  const onEdit = useCallback(() => {}, []);
+  const onEdit = useCallback(
+    (listing: SafeListing) => {
+      setEditingBook(listing);
+      addModal.onOpen();
+    },
+    [addModal]
+  );
 
   return (
     <Container>
       <div className="pt-6" />
-      <Heading title="Book Catalog" subtitle="List of your books" />
+      <div className="flex items-center justify-between">
+        <Heading title="Book Catalog" subtitle="List of your books" />
+        <span className="font-light text-neutral-500">
+          Total books: {listings.length}
+        </span>
+      </div>
+
       <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {listings.map((listing: SafeListing) => (
           <BookCard
@@ -58,6 +74,7 @@ const CatalogClient = ({ listings, currentUser }: CatalogClientProps) => {
           />
         ))}
       </div>
+      <AddModal initialsValues={editingBook} />
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Modal from "./Modal";
 import useAddModal from "@/app/hook/useAddModal";
 import Heading from "../Heading";
@@ -11,6 +11,7 @@ import Input from "../Input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { SafeListing } from "@/app/types";
 
 enum STEPS {
   CATEGORY = 0,
@@ -19,7 +20,11 @@ enum STEPS {
   DESCRIPTION = 3,
 }
 
-const AddModal = () => {
+interface AddModalProps {
+  initialsValues?: SafeListing | null;
+}
+
+const AddModal = ({ initialsValues }: AddModalProps) => {
   const addModal = useAddModal();
   const router = useRouter();
 
@@ -47,6 +52,22 @@ const AddModal = () => {
     },
   });
 
+  useEffect(() => {
+    if (initialsValues) {
+      reset({
+        category: initialsValues.category || "",
+        imageSrc: initialsValues.imageSrc || "",
+        title: initialsValues.title || "",
+        author: initialsValues.author || "",
+        page: initialsValues.page || 1,
+        imprint: initialsValues.imprint || "",
+        isbn: initialsValues.isbn || 1,
+        published: initialsValues.published || "",
+        description: initialsValues.description || "",
+      });
+    }
+  }, [initialsValues, reset]);
+
   const category = watch("category");
   const imageSrc = watch("imageSrc");
 
@@ -73,12 +94,20 @@ const AddModal = () => {
 
     setIsLoading(true);
 
-    console.log(data);
+    const apiUrl = initialsValues
+      ? `/api/listings/${initialsValues.id}`
+      : `/api/listings`;
+
+    const method = initialsValues ? "PUT" : "POST";
 
     axios
-      .post("/api/listings", data)
+      .request({
+        method: method,
+        data: data,
+        url: apiUrl,
+      })
       .then(() => {
-        toast.success("Book Added!");
+        toast.success(initialsValues ? "Book Updated!" : "Book Added!");
         router.refresh();
         reset();
         setStep(STEPS.CATEGORY);
@@ -95,10 +124,10 @@ const AddModal = () => {
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.DESCRIPTION) {
-      return "Create";
+      return initialsValues ? "Update " : "Create";
     }
     return "Next";
-  }, [step]);
+  }, [step,initialsValues]);
 
   const secondaryActionLabel = useMemo(() => {
     if (step === STEPS.CATEGORY) {

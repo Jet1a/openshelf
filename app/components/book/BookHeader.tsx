@@ -9,7 +9,7 @@ interface BookHeaderProps {
 
   id: string;
 
-  currentUser?: SafeUser | null;
+  currentUser?: SafeUser;
 }
 
 const BookHeader = ({ imageSrc, id, currentUser }: BookHeaderProps) => {

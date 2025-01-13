@@ -16,8 +16,9 @@ interface BookCardProps {
   actionLabel?: string;
   actionId?: string;
   secondaryLabel?: string;
-  onSecondaryAction?: (id: string) => void;
-  currentUser?: SafeUser | null;
+  onSecondaryAction?: (listing: SafeListing) => void;
+  currentUser?: SafeUser;
+  rentUser?: SafeUser;
 }
 
 const BookCard = ({
@@ -30,6 +31,7 @@ const BookCard = ({
   secondaryLabel,
   onSecondaryAction,
   currentUser,
+  rentUser,
 }: BookCardProps) => {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
@@ -61,9 +63,9 @@ const BookCard = ({
         return;
       }
 
-      onAction?.(actionId);
+      onSecondaryAction?.(data);
     },
-    [onAction, disabled, actionId]
+    [onSecondaryAction, disabled, data]
   );
 
   const rentalDate = useMemo(() => {
@@ -122,7 +124,7 @@ const BookCard = ({
         </div>
         {!isClient && (
           <span className="font-light text-neutral-500 text-xs">
-            ( rent by {rental?.userId} )
+            ( rent by {rentUser?.email} )
           </span>
         )}
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 interface MenuItemProps {
   onClick: () => void;
-  label: string | null;
+  label: string | undefined;
   hover?: boolean;
 }
 

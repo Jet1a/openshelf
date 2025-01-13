@@ -33,7 +33,7 @@ const RentedBookPage = async () => {
 
   return (
     <ClientOnly>
-      <RentedClient rentals={rentals} currentUser={currentUser}  />
+      <RentedClient rentals={rentals} currentUser={currentUser} />
     </ClientOnly>
   );
 };

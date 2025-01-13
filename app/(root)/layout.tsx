@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Mulish } from "next/font/google";
 import "../globals.css";
 import Navbar from "../components/header/Navbar";
 import RegisterModal from "../components/modal/RegisterModal";
 import ToasterProvider from "../provider/ToasterProvider";
 import LoginModal from "../components/modal/LoginModal";
 import getCurrentUser from "../action/getCurrentUser";
-import AddModal from "../components/modal/AddModal";
 import ClientOnly from "../components/ClientOnly";
 import Footer from "../components/Footer";
+import ConditionalAddModal from "../components/modal/ConditionalAddModal";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fontVariant = Mulish({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -34,9 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
-      >
+      <body className={`${fontVariant.className} antialiased `}>
         <div className="flex flex-col min-h-screen">
           {/* Content Area */}
           <main className="flex-grow">
@@ -44,7 +37,7 @@ export default async function RootLayout({
               <ToasterProvider />
               <LoginModal />
               <RegisterModal />
-              <AddModal />
+              <ConditionalAddModal />
               <Navbar currentUser={currentUser} />
             </ClientOnly>
             {children}

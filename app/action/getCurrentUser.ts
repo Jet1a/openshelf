@@ -26,11 +26,14 @@ export default async function getCurrentUser() {
 
     return {
       ...currentUser,
-      createdAt: currentUser.createAt.toISOString(),
+      createdAt: currentUser.createdAt.toISOString(),
       updatedAt: currentUser.updatedAt.toISOString(),
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
-  } catch (error: ErrorOptions | unknown) {
-    return null;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error(String(error));
   }
 }

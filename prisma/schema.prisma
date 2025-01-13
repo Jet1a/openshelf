@@ -20,14 +20,14 @@ model User {
   emailVerified  DateTime?
   image          String?
   hashedPassword String?
-  createAt       DateTime  @default(now())
+  createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   favoriteIds    String[]  @db.ObjectId
   isAdmin        Boolean   @default(false)
 
-  accounts     Account[]
-  listings     Listing[]
-  rental Rental[]
+  accounts Account[]
+  listings Listing[]
+  rental   Rental[]
 }
 
 model Account {

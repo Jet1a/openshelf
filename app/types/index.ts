@@ -12,6 +12,7 @@ export type SafeRental = Omit<
   startDate: string;
   endDate: string;
   listing: SafeListing;
+  user: SafeUser | null;
 };
 
 export type SafeUser = Omit<

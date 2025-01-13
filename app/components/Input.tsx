@@ -49,7 +49,7 @@ const Input = ({
             type={type}
             min={type === "number" ? 0 : undefined}
             value={value}
-            className={`peer w-full p-4 h-full font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed 
+            className={`peer w-full pt-5 pb-2 px-4 h-full font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed 
             ${errors[id] ? "border-rose-500" : "border-neutral-300"}
             ${errors[id] ? "focus:border-rose-500" : "focus:border-black"}`}
           />

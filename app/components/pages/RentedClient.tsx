@@ -56,6 +56,7 @@ const RentedClient = ({ rentals, currentUser }: RentedClientProps) => {
               actionLabel="Cancel guest rental"
               currentUser={currentUser}
               disabled={deletingId === rental.id}
+              rentUser={rental.user}
             />
           ))}
         </div>

@@ -9,10 +9,10 @@ import useLoginModal from "./useLoginModal";
 
 interface IUseFavoriteProps {
   bookId: string;
-  currentUser?: SafeUser | null
+  currentUser?: SafeUser;
 }
 
-const useFavorite = ({bookId, currentUser}: IUseFavoriteProps) => {
+const useFavorite = ({ bookId, currentUser }: IUseFavoriteProps) => {
   const router = useRouter();
   const loginModal = useLoginModal();
 
@@ -25,7 +25,7 @@ const useFavorite = ({bookId, currentUser}: IUseFavoriteProps) => {
   const toggleFavorite = useCallback(
     async (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
-      
+
       if (!currentUser) {
         return loginModal.onOpen();
       }

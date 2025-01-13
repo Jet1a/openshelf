@@ -1,4 +1,5 @@
 import prisma from "@/app/lib/prismadb";
+import { SafeRental } from "../types";
 
 interface IParams {
   bookId?: string;
@@ -30,13 +31,14 @@ export default async function getRental(params: IParams) {
       where: query,
       include: {
         listing: true,
+        user: true,
       },
       orderBy: {
         createdAt: "desc",
       },
     });
 
-    const safeRental = rentals.map((rental) => ({
+    const safeRental: SafeRental[] = rentals.map((rental) => ({
       ...rental,
       createdAt: rental.createdAt.toISOString(),
       startDate: rental.startDate.toISOString(),
@@ -45,6 +47,16 @@ export default async function getRental(params: IParams) {
         ...rental.listing,
         createdAt: rental.listing.createdAt.toISOString(),
       },
+      user: rental.user
+        ? {
+            ...rental.user,
+            createdAt: rental.user.createdAt.toISOString(),
+            updatedAt: rental.user.updatedAt.toISOString(),
+            emailVerified: rental.user.emailVerified
+              ? rental.user.emailVerified.toISOString()
+              : null,
+          }
+        : null,
     }));
 
     return safeRental;
