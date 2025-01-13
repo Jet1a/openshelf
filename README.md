@@ -1,5 +1,7 @@
 # OpenShelf
 
+![OpenShelf Screenshot](./assets/screenshot.png)
+
 OpenShelf is a modern web application for book enthusiasts, allowing users to explore, rent, and manage books conveniently. With OpenShelf, users can select books to rent by specifying a date range, mark books as favorites, and view their rental history. The platform also features an admin interface for managing the book inventory through CRUD operations.
 
 ## Features
