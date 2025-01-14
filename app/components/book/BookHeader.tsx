@@ -6,10 +6,8 @@ import HeartButton from "../HeartButton";
 
 interface BookHeaderProps {
   imageSrc: string;
-
   id: string;
-
-  currentUser?: SafeUser;
+  currentUser?: SafeUser | null;
 }
 
 const BookHeader = ({ imageSrc, id, currentUser }: BookHeaderProps) => {

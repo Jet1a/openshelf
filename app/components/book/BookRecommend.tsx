@@ -5,7 +5,7 @@ import { SafeListing, SafeUser } from "@/app/types";
 
 interface BookRecommendProps {
   listings: SafeListing[];
-  currentUser?: SafeUser;
+  currentUser?: SafeUser | null;
 }
 
 const BookRecommend = ({ listings, currentUser }: BookRecommendProps) => {

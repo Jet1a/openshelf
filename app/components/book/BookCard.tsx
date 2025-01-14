@@ -1,12 +1,12 @@
 "use client";
 
 import { SafeListing, SafeRental, SafeUser } from "@/app/types";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { format } from "date-fns";
 import Image from "next/image";
-import HeartButton from "../HeartButton";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Button from "../Button";
+import HeartButton from "../HeartButton";
 
 interface BookCardProps {
   data: SafeListing;
@@ -18,7 +18,7 @@ interface BookCardProps {
   secondaryLabel?: string;
   onSecondaryAction?: (listing: SafeListing) => void;
   currentUser?: SafeUser | null;
-  rentUser?: SafeUser;
+  rentUser?: SafeUser | null;
 }
 
 const BookCard = ({

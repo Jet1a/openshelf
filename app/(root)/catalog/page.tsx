@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import getCurrentUser from "@/app/action/getCurrentUser";
 import getListings from "@/app/action/getListings";
 import Categories from "@/app/components/Categories";

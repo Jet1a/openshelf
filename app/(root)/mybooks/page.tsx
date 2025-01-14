@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import getCurrentUser from "@/app/action/getCurrentUser";
 import getRental from "@/app/action/getRental";
 import BookRentClient from "@/app/components/pages/BookRentClient";

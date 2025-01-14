@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
-import Container from "../Container";
-import BookCard from "../book/BookCard";
 import { SafeListing, SafeUser } from "@/app/types";
 import { useRouter, useSearchParams } from "next/navigation";
+import React from "react";
 import ClientOnly from "../ClientOnly";
+import Container from "../Container";
 import EmptyState from "../EmptyState";
+import BookCard from "../book/BookCard";
 
 interface DiscoverClientProps {
   listings: SafeListing[];
