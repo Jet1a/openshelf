@@ -6,7 +6,7 @@ import useFavorite from "../hook/useFavorite";
 
 interface HeartButtonProps {
   bookId: string;
-  currentUser?: SafeUser;
+  currentUser?: SafeUser | null;
 }
 
 const HeartButton = ({ bookId, currentUser }: HeartButtonProps) => {

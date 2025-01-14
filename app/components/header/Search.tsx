@@ -15,7 +15,7 @@ const Search = () => {
     e.preventDefault();
     const params = new URLSearchParams(window.location.search);
     params.set("search", searchQuery);
-    router.replace(`/discover?${params.toString()}`);
+    router.replace(`/discover?${params.toString().toLowerCase()}`);
   };
 
   return (

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Categories from "../Categories";
 import Container from "../Container";
 import BookCard from "../book/BookCard";
 import { SafeListing, SafeUser } from "@/app/types";
@@ -47,7 +46,6 @@ const DiscoverClient = ({ listings, currentUser }: DiscoverClientProps) => {
 
   return (
     <article>
-      <Categories />
       <Container>
         <div className="pt-6 flex items-center justify-between">
           <h1 className="text-2xl font-semibold">What&apos;s New?</h1>

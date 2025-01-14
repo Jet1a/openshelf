@@ -17,7 +17,7 @@ interface BookCardProps {
   actionId?: string;
   secondaryLabel?: string;
   onSecondaryAction?: (listing: SafeListing) => void;
-  currentUser?: SafeUser;
+  currentUser?: SafeUser | null;
   rentUser?: SafeUser;
 }
 
