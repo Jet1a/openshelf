@@ -85,7 +85,7 @@ const Modal = ({
                 <div className="text-lg font-semibold">{title}</div>
               </div>
               {/* Body */}
-              <div className="relative px-6 py-2 flex-auto">{body}</div>
+              <div className="relative px-6 py-2">{body}</div>
               {/* Footer */}
               <div className="flex flex-col gap-2 px-6 py-2">
                 <div className="flex flex-row items-center gap-4 w-full">

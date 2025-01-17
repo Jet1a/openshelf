@@ -3,7 +3,6 @@ import React from "react";
 interface MenuItemProps {
   onClick: () => void;
   label: string | undefined;
-  hover?: boolean;
 }
 
 const MenuItem = ({ onClick, label = "User" }: MenuItemProps) => {

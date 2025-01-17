@@ -45,31 +45,29 @@ const DiscoverClient = ({ listings, currentUser }: DiscoverClientProps) => {
   }
 
   return (
-    <article>
+    <main>
       <Container>
-        <div className="pt-6 flex items-center justify-between">
-          <h1 className="text-2xl font-semibold">What&apos;s New?</h1>
-          <div className="">
-            <span>
-              Sorted By:
-              <select
-                onChange={handleSortedChange}
-                id="sort"
-                name="sort"
-                className="border-2 rounded-md ml-2 cursor-pointer focus:outline-none"
-              >
-                <option className="cursor-pointer" value="recently">
-                  Recently Added
-                </option>
-                <option className="cursor-pointer" value="title">
-                  Title a-z
-                </option>
-              </select>
-            </span>
+        <div className="pt-6 flex items-center justify-between gap-4">
+          <h1 className="text-lg sm:text-2xl font-semibold">What&apos;s New?</h1>
+          <div className="flex items-center justify-center">
+            <span>Sorted By:</span>
+            <select
+              onChange={handleSortedChange}
+              id="sort"
+              name="sort"
+              className="border-2 rounded-md ml-2 cursor-pointer focus:outline-none"
+            >
+              <option className="cursor-pointer" value="recently">
+                Recently Added
+              </option>
+              <option className="cursor-pointer" value="title">
+                Title a-z
+              </option>
+            </select>
           </div>
         </div>
 
-        <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+        <article className="pt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
           {filteredListings.map((listing: SafeListing) => {
             return (
               <BookCard
@@ -79,9 +77,9 @@ const DiscoverClient = ({ listings, currentUser }: DiscoverClientProps) => {
               />
             );
           })}
-        </div>
+        </article>
       </Container>
-    </article>
+    </main>
   );
 };
 

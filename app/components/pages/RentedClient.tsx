@@ -40,12 +40,12 @@ const RentedClient = ({ rentals, currentUser }: RentedClientProps) => {
   );
   return (
     <Container>
-      <div className="pt-6">
+      <main className="pt-6">
         <Heading
           title="Rental History"
           subtitle="List of books that have been rent"
         />
-        <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+        <article className="pt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
           {rentals.map((rental: SafeRental) => (
             <BookCard
               key={rental.id}
@@ -59,8 +59,8 @@ const RentedClient = ({ rentals, currentUser }: RentedClientProps) => {
               rentUser={rental.user}
             />
           ))}
-        </div>
-      </div>
+        </article>
+      </main>
     </Container>
   );
 };

@@ -24,32 +24,34 @@ const HomeClient = ({ listings, currentUser }: HomeClientProps) => {
               <Link href={"/discover"}>View all products</Link>
             </span>
           </div>
-          <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-            {listings.map((listing: SafeListing) => {
-              return (
-                <BookCard
-                  key={listing.id}
-                  currentUser={currentUser}
-                  data={listing}
-                />
-              );
-            })}
+          <div className="overflow-x-auto pt-6">
+            <div className="flex sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
+              {listings.map((listing: SafeListing) => {
+                return (
+                  <BookCard
+                    key={listing.id}
+                    currentUser={currentUser}
+                    data={listing}
+                  />
+                );
+              })}
+            </div>
           </div>
-          <div className="my-6 max-w-[70vw] mx-auto border-2 rounded-xl border-orange-400">
+          <article className="my-6 max-w-[70vw] mx-auto border-2 p-6  rounded-xl border-orange-400">
             <div className="flex flex-col flex-wrap  sm:flex-row items-center justify-center">
-              <div className="flex sm:items-start sm:justify-start text-center justify-center items-center md:text-start flex-col p-6 space-y-2 text-orange-400">
-                <span className="font-light text-[14px]">
+              <div className="flex sm:w-[500px] sm:items-start sm:justify-start text-center justify-center items-center md:text-start flex-col space-y-2 text-orange-400">
+                <span className="font-light text-[14px] sm:text-[24px]">
                   Openshelf Subscriptions
                 </span>
-                <h1 className="font-bold text-[60px] leading-none">
+                <h1 className="font-bold text-[35px] sm:text-[60px] leading-none">
                   Montly <br /> Subscription <br /> Service
                 </h1>
-                <span className="font-light text-[14px]">
+                <span className="font-light text-[14px] sm:text-[24px]">
                   Monthly personalised subscription service, to your door for 6
                   or 12 months.
                 </span>
               </div>
-              <div className="relative w-[400px] h-[400px]">
+              <div className="relative h-[200px] w-[200px] sm:w-[400px] sm:h-[400px]">
                 <Image
                   src={reading}
                   alt="subscription"
@@ -58,7 +60,7 @@ const HomeClient = ({ listings, currentUser }: HomeClientProps) => {
                 />
               </div>
             </div>
-          </div>
+          </article>
         </Container>
       </article>
     </main>

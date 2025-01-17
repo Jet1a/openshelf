@@ -87,14 +87,10 @@ const BookClient = ({
 
   return (
     <Container>
-      <div className="max-w-screen-lg mx-auto">
+      <main className="max-w-screen-lg mx-auto">
         <div className="flex flex-row gap-6">
           <article className="flex pt-12 items-center lg:items-start justify-center mx-auto flex-wrap flex-col lg:flex-nowrap lg:flex-row gap-10">
-            <BookHeader
-              imageSrc={book.imageSrc}
-              id={book.id}
-              currentUser={currentUser}
-            />
+            <BookHeader imageSrc={book.imageSrc} />
             <BookInfo
               book={book}
               onSubmit={onCreateRental}
@@ -103,10 +99,12 @@ const BookClient = ({
               dateRange={dateRange}
               disabled={isLoading}
               disabledDates={disabledDates}
+              id={book.id}
+              currentUser={currentUser}
             />
           </article>
         </div>
-      </div>
+      </main>
       <BookRecommend listings={listings} currentUser={currentUser} />
     </Container>
   );

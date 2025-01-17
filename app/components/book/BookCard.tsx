@@ -84,7 +84,7 @@ const BookCard = ({
       className="col-span-1 cursor-pointer"
     >
       <div className="flex flex-col space-y-1 w-full text-center h-full">
-        <div className="h-[300px] w-full relative border rounded-lg overflow-hidden shadow-sm">
+        <div className="h-[300px] w-[205px] mx-auto relative border rounded-lg overflow-hidden shadow-sm">
           <Image
             src={data.imageSrc}
             alt={data.title}

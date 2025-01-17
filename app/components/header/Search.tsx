@@ -19,7 +19,7 @@ const Search = () => {
   };
 
   return (
-    <div className="w-[400px] border p-1 rounded-xl hidden md:block">
+    <div className="max-w-[400px] border p-1 rounded-xl hidden lg:block">
       <div className="flex items-center space-x-2 relative">
         <BiSearch size={25} className="text-gray-400 ml-2 justify-self-start" />
         <form className="flex items-center flex-1">
