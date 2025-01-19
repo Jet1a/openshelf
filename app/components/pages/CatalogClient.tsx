@@ -69,7 +69,7 @@ const CatalogClient = ({ listings, currentUser }: CatalogClientProps) => {
             onAction={onCancel}
             actionLabel="Remove book"
             secondaryLabel="Edit book"
-            onSecondaryAction={onEdit}
+            onEditAction={onEdit}
             currentUser={currentUser}
           />
         ))}

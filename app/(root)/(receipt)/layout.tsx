@@ -1,4 +1,3 @@
-import Categories from "@/app/components/Categories";
 import React from "react";
 
 const layout = ({
@@ -6,12 +5,7 @@ const layout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  return (
-    <main>
-      <Categories />
-      {children}
-    </main>
-  );
+  return <section>{children}</section>;
 };
 
 export default layout;

@@ -37,6 +37,13 @@ const BookRentClient = ({ rentals, currentUser }: BookRentClientProps) => {
     [router]
   );
 
+  const onReceipt = useCallback(
+    (rentalId: string) => {
+      router.push(`/receipt/${rentalId}`);
+    },
+    [router]
+  );
+
   return (
     <Container>
       <div className="pt-6" />
@@ -53,6 +60,8 @@ const BookRentClient = ({ rentals, currentUser }: BookRentClientProps) => {
             actionId={rental.id}
             onAction={onCancel}
             actionLabel="Cancel rent"
+            onSecondaryAction={onReceipt}
+            secondaryLabel="Receipt details"
             currentUser={currentUser}
             disabled={deletingId === rental.id}
           />

@@ -16,7 +16,8 @@ interface BookCardProps {
   actionLabel?: string;
   actionId?: string;
   secondaryLabel?: string;
-  onSecondaryAction?: (listing: SafeListing) => void;
+  onSecondaryAction?: (id: string) => void;
+  onEditAction?: (listing: SafeListing) => void;
   currentUser?: SafeUser | null;
   rentUser?: SafeUser | null;
 }
@@ -30,6 +31,7 @@ const BookCard = ({
   actionLabel,
   secondaryLabel,
   onSecondaryAction,
+  onEditAction,
   currentUser,
   rentUser,
 }: BookCardProps) => {
@@ -56,6 +58,18 @@ const BookCard = ({
     [onAction, disabled, actionId]
   );
 
+  const handleSecondaryAction = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      if (disabled) {
+        return;
+      }
+
+      onSecondaryAction?.(actionId);
+    },
+    [onSecondaryAction, disabled, actionId]
+  );
+
   const handleEdit = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
@@ -63,9 +77,9 @@ const BookCard = ({
         return;
       }
 
-      onSecondaryAction?.(data);
+      onEditAction?.(data);
     },
-    [onSecondaryAction, disabled, data]
+    [onEditAction, disabled, data]
   );
 
   const rentalDate = useMemo(() => {
@@ -104,7 +118,7 @@ const BookCard = ({
             {rentalDate || data.category}
           </div>
         </div>
-        <div className="flex items-center justify-center gap-2 pt-2">
+        <div className="flex flex-col items-center justify-center gap-2 pt-2">
           {onAction && actionLabel && (
             <Button
               disable={disabled}
@@ -118,6 +132,14 @@ const BookCard = ({
               disable={disabled}
               small
               label={secondaryLabel}
+              onClick={handleSecondaryAction}
+            />
+          )}
+          {onEditAction && (
+            <Button
+              disable={disabled}
+              small
+              label="Edit book"
               onClick={handleEdit}
             />
           )}
