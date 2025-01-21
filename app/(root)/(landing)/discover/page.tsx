@@ -7,11 +7,24 @@ import EmptyState from "@/app/components/EmptyState";
 import DiscoverClient from "@/app/components/pages/DiscoverClient";
 
 interface DiscoverPageProps {
-  searchParams: IListingParams;
+  searchParams: IListingParams & { page?: number; limit?: number };
 }
 
 const DiscoverPage = async ({ searchParams }: DiscoverPageProps) => {
-  const listings = await getListings(searchParams);
+
+  const page = Number(searchParams.page || 1);
+  const limit = Number(searchParams.limit || 18);
+  const search = searchParams.search || "";
+  const sorted = searchParams.sorted || "recently";
+
+  const { listings, totalCount } = await getListings({
+    ...searchParams,
+    page,
+    limit,
+    search,
+    sorted,
+  });
+
   const currentUser = await getCurrentUser();
 
   if (listings.length === 0) {
@@ -24,7 +37,13 @@ const DiscoverPage = async ({ searchParams }: DiscoverPageProps) => {
 
   return (
     <ClientOnly>
-      <DiscoverClient listings={listings} currentUser={currentUser} />
+      <DiscoverClient
+        listings={listings}
+        currentUser={currentUser}
+        currentPage={Number(page)}
+        itemsPerPage={Number(limit)}
+        totalCount={totalCount}
+      />
     </ClientOnly>
   );
 };

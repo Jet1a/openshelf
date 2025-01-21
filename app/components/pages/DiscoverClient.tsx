@@ -1,38 +1,43 @@
 "use client";
 
 import { SafeListing, SafeUser } from "@/app/types";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 import ClientOnly from "../ClientOnly";
 import Container from "../Container";
 import EmptyState from "../EmptyState";
 import BookCard from "../book/BookCard";
+import DiscoverPagination from "../DiscoverPagination";
 
 interface DiscoverClientProps {
   listings: SafeListing[];
+  totalCount: number;
+  currentPage: number;
+  itemsPerPage: number;
   currentUser?: SafeUser | null;
 }
 
-const DiscoverClient = ({ listings, currentUser }: DiscoverClientProps) => {
+const DiscoverClient = ({
+  listings,
+  currentUser,
+  totalCount,
+  currentPage,
+  itemsPerPage,
+}: DiscoverClientProps) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const search = searchParams?.get("search") || "";
-  const sorted = searchParams?.get("sorted");
-
-  if (sorted === "title") {
-    listings = listings.sort((a, b) => {
-      return a.title.localeCompare(b.title);
-    });
-  }
-
-  const filteredListings = listings.filter((listing) =>
-    listing.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredListings = listings;
 
   const handleSortedChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const params = new URLSearchParams(window.location.search);
     params.set("sorted", e.target.value);
+    params.set("page", "1");
+    router.replace(`/discover?${params.toString()}`);
+  };
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("page", page.toString());
     router.replace(`/discover?${params.toString()}`);
   };
 
@@ -48,7 +53,9 @@ const DiscoverClient = ({ listings, currentUser }: DiscoverClientProps) => {
     <main>
       <Container>
         <div className="pt-6 flex items-center justify-between gap-4">
-          <h1 className="text-lg sm:text-2xl font-semibold">What&apos;s New?</h1>
+          <h1 className="text-lg sm:text-2xl font-semibold">
+            What&apos;s New?
+          </h1>
           <div className="flex items-center justify-center">
             <span>Sorted By:</span>
             <select
@@ -78,6 +85,12 @@ const DiscoverClient = ({ listings, currentUser }: DiscoverClientProps) => {
             );
           })}
         </article>
+        <DiscoverPagination
+          currentPage={currentPage}
+          totalItems={totalCount}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
       </Container>
     </main>
   );

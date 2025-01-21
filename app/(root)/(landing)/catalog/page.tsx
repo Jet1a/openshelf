@@ -22,7 +22,7 @@ const CatalogPage = async () => {
     userId: currentUser.id,
   });
 
-  if (listings.length === 0) {
+  if (listings.listings.length === 0) {
     return (
       <ClientOnly>
         <Categories />
@@ -36,7 +36,7 @@ const CatalogPage = async () => {
 
   return (
     <ClientOnly>
-      <CatalogClient listings={listings} currentUser={currentUser} />
+      <CatalogClient listings={listings.listings} currentUser={currentUser} />
     </ClientOnly>
   );
 };
