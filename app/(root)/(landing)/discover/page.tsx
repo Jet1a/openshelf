@@ -7,10 +7,11 @@ import EmptyState from "@/app/components/EmptyState";
 import DiscoverClient from "@/app/components/pages/DiscoverClient";
 
 interface DiscoverPageProps {
-  searchParams: IListingParams & { page?: number; limit?: number };
+  searchParams: Promise<IListingParams & { page?: number; limit?: number }>;
 }
 
-const DiscoverPage = async ({ searchParams }: DiscoverPageProps) => {
+const DiscoverPage = async (props: DiscoverPageProps) => {
+  const searchParams = await props.searchParams;
 
   const page = Number(searchParams.page || 1);
   const limit = Number(searchParams.limit || 18);

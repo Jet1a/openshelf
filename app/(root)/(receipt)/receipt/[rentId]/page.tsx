@@ -9,7 +9,8 @@ interface IParams {
   rentId?: string;
 }
 
-const ReceiptPage = async ({ params }: { params: IParams }) => {
+const ReceiptPage = async (props: { params: Promise<IParams> }) => {
+  const params = await props.params;
   const rentals = await getReceipt(params);
   const currentUser = await getCurrentUser();
 

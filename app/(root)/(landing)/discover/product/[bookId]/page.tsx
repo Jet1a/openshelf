@@ -11,7 +11,8 @@ interface IParams {
   bookId?: string;
 }
 
-const BookPage = async ({ params }: { params: IParams }) => {
+const BookPage = async (props: { params: Promise<IParams> }) => {
+  const params = await props.params;
   const book = await getBookById(params);
   const rentals = await getRental(params);
   const currentUser = await getCurrentUser();
