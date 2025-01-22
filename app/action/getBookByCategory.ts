@@ -9,7 +9,7 @@ export default async function getBookByCategory(
   params: IParams
 ) {
   try {
-    const { bookId } = await params;
+    const { bookId } = params;
 
     let listings = await prisma.listing.findMany({
       where: {
@@ -18,6 +18,7 @@ export default async function getBookByCategory(
           not: bookId,
         },
       },
+      take: 6,
     });
 
     if (listings.length < 6) {

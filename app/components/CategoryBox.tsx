@@ -26,6 +26,7 @@ const CategoryBox = ({ label, icon: Icon, selected }: categoriesBoxProps) => {
     const updatedQuery: Record<string, string | undefined> = {
       ...currentQuery,
       category: label,
+      page: "1"
     };
 
     if (params?.get("category") === label) {

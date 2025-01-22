@@ -88,7 +88,7 @@ const BookClient = ({
   return (
     <Container>
       <main className="max-w-screen-lg mx-auto">
-        <div className="flex flex-row gap-6">
+        <div className="">
           <article className="flex pt-12 items-center lg:items-start justify-center mx-auto flex-wrap flex-col lg:flex-nowrap lg:flex-row gap-10">
             <BookHeader imageSrc={book.imageSrc} />
             <BookInfo
