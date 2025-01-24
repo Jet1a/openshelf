@@ -14,7 +14,7 @@ interface HomeClientProps {
 
 const HomeClient = ({ listings, currentUser }: HomeClientProps) => {
   return (
-    <main className="min-h-screen">
+    <main>
       <CarouselHome />
       <article>
         <Container>
@@ -25,7 +25,7 @@ const HomeClient = ({ listings, currentUser }: HomeClientProps) => {
             </span>
           </div>
           <div className="overflow-x-auto pt-6">
-            <div className="flex sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
+            <div className="flex sm:grid  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
               {listings.map((listing: SafeListing) => {
                 return (
                   <BookCard

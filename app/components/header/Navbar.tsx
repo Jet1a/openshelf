@@ -12,18 +12,18 @@ interface NavbarProps {
 
 const Navbar = ({ currentUser }: NavbarProps) => {
   return (
-    <nav className="w-full bg-white z-10 shadow-sm">
-      <div className="py-4 border-b">
-        <Container>
-          <div className="flex items-center justify-between gap-4 md:gap-0">
-            <div className="flex items-center justify-center gap-4">
-              <Logo />
+    <nav className="w-full bg-white z-10 shadow-sm py-4 border-b">
+      <Container>
+        <div className="flex items-center justify-between gap-4 md:gap-0">
+          <div className="flex items-center justify-center gap-4">
+            <Logo />
+            <div className="hidden lg:block">
               <Search />
             </div>
-            <MenuList currentUser={currentUser} />
           </div>
-        </Container>
-      </div>
+          <MenuList currentUser={currentUser} />
+        </div>
+      </Container>
     </nav>
   );
 };

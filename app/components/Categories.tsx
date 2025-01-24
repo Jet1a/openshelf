@@ -111,7 +111,7 @@ const Categories = () => {
   }
 
   return (
-    <div className="sm:px-2 md:px-10 lg:px-14 pt-4 flex flex-row items-center justify-between overflow-x-auto">
+    <div className="sm:px-2 md:px-10 lg:px-14 sm:pt-4 flex flex-row items-center justify-between overflow-x-auto">
       {genre.map((item) => (
         <CategoryBox
           key={item.label}

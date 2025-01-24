@@ -30,7 +30,7 @@ const CarouselHome = () => {
             className="relative flex items-center justify-center "
           >
             <Link href={`/discover`}>
-              <div className="flex items-center justify-center w-[520px] h-[300px]">
+              <div className="flex items-center justify-center w-[428px] sm:w-[520px] h-[300px]">
                 <Image
                   src={path}
                   alt="carousel image"

@@ -98,7 +98,7 @@ const BookCard = ({
       className="col-span-1 cursor-pointer"
     >
       <div className="flex flex-col space-y-1 w-full text-center h-full">
-        <div className="h-[300px] w-[205px] mx-auto relative border rounded-lg overflow-hidden shadow-sm">
+        <div className="h-[255px] sm:h-[300px] w-[165px] sm:w-[205px] mx-auto relative border rounded-lg overflow-hidden shadow-sm">
           <Image
             src={data.imageSrc}
             alt={data.title}
@@ -109,7 +109,7 @@ const BookCard = ({
             <HeartButton bookId={data.id} currentUser={currentUser} />
           </div>
         </div>
-        <div className="flex-1">
+        <div>
           <div className="font-semibold text-md">{data.title}</div>
           <div className="font-light text-sm">
             <span>by {data.author}</span>

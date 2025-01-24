@@ -40,7 +40,6 @@ const MenuList = ({ currentUser }: MenuListProps) => {
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
-        {/* Hamburger Button for Small Screens */}
         <div className="sm:hidden">
           <button
             className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-300"
@@ -64,7 +63,7 @@ const MenuList = ({ currentUser }: MenuListProps) => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden sm:flex cursor-pointer gap-3">
+        <div className="hidden sm:flex gap-3">
           <MenuItem onClick={() => router.push(`/discover`)} label="Discover" />
           <MenuItem onClick={() => router.push(`/mybooks`)} label="My Books" />
           <MenuItem
@@ -100,10 +99,6 @@ const MenuList = ({ currentUser }: MenuListProps) => {
             />
             {currentUser ? (
               <>
-                <span className="px-4 py-3 transition font-semibold">
-                  Welcome {currentUser?.name}
-                </span>
-                <hr />
                 {currentUser?.isAdmin && (
                   <div className="cursor-pointer">
                     <MenuItem onClick={onAddBook} label="Add Books" />

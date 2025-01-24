@@ -8,6 +8,14 @@ import Container from "../Container";
 import EmptyState from "../EmptyState";
 import BookCard from "../book/BookCard";
 import DiscoverPagination from "../DiscoverPagination";
+import Search from "../header/Search";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface DiscoverClientProps {
   listings: SafeListing[];
@@ -28,9 +36,9 @@ const DiscoverClient = ({
 
   const filteredListings = listings;
 
-  const handleSortedChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSortedChange = (value: string) => {
     const params = new URLSearchParams(window.location.search);
-    params.set("sorted", e.target.value);
+    params.set("sorted", value);
     params.set("page", "1");
     router.replace(`/discover?${params.toString()}`);
   };
@@ -52,29 +60,23 @@ const DiscoverClient = ({
   return (
     <main>
       <Container>
-        <div className="pt-6 flex items-center justify-between gap-4">
-          <h1 className="text-lg sm:text-2xl font-semibold">
-            What&apos;s New?
-          </h1>
-          <div className="flex items-center justify-center">
-            <span>Sorted By:</span>
-            <select
-              onChange={handleSortedChange}
-              id="sort"
-              name="sort"
-              className="border-2 rounded-md ml-2 cursor-pointer focus:outline-none"
-            >
-              <option className="cursor-pointer" value="recently">
-                Recently Added
-              </option>
-              <option className="cursor-pointer" value="title">
-                Title a-z
-              </option>
-            </select>
+        <div className="sm:pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <h1 className="text-2xl font-semibold">What&apos;s New?</h1>
+          <div className="flex sm:hidden">
+            <Search />
           </div>
+          <Select onValueChange={handleSortedChange} defaultValue="recently">
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Sorted" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="recently">Recently added</SelectItem>
+              <SelectItem value="title">Title A-Z</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
-        <article className="pt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
+        <article className="pt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
           {filteredListings.map((listing: SafeListing) => {
             return (
               <BookCard

@@ -52,10 +52,10 @@ const BookInfo = ({
           disabledDates={disabledDates}
         />
       </div>
-      <div className="flex flex-col items-start justify-start space-y-2 break-words">
+      <div className="flex flex-col items-start justify-start space-y-2 break-words text-[14px]">
         <h1 className="text-xl font-semibold">Description</h1>
         <span
-          className="text-wrap"
+          className="text-wrap "
           dangerouslySetInnerHTML={{ __html: formattedDescription }}
         />
         <div className="flex flex-col items-start justify-start space-y-2">

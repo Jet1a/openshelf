@@ -7,8 +7,8 @@ interface MenuItemProps {
 
 const MenuItem = ({ onClick, label = "User" }: MenuItemProps) => {
   return (
-    <div onClick={onClick} className="px-4 py-3 transition font-semibold">
-      <div className="group relative">
+    <div onClick={onClick} className="px-4 py-3 transition font-semibold ">
+      <div className="group relative cursor-pointer">
         <span>{label}</span>
         <span className="absolute -bottom-1 left-0 w-0 transition-all h-[2px] bg-orange-400 group-hover:w-full"></span>
       </div>
